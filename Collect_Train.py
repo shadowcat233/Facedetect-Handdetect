@@ -11,20 +11,21 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import pycaw.pycaw as pycaw
 
-#创建imgs文件夹
+# 创建imgs文件夹
 DATA_DIR = './imgs'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
     
-#设置手势类别数量
-number_of_classes = 3
+# 设置手势类别数量，三种需要识别的手势和用于区分的第四类手势
+number_of_classes = 4
 
-#设置每个类别样本数
-dataset_size = 100
+# 设置每个类别样本数，前三类为size1，后三类为size2
+dataset_size1 = 100
+dataset_size2 = 500
 
 
 
-#收集自定义微数据集并写入imgs文件夹
+# 收集自定义微数据集并写入imgs文件夹
 cap = cv2.VideoCapture(0)
 for j in range(number_of_classes):
     if not os.path.exists(os.path.join(DATA_DIR, str(j))):
@@ -41,6 +42,10 @@ for j in range(number_of_classes):
         if cv2.waitKey(25) == ord('r'):
             break
     counter = 0
+    if j!=3:
+        dataset_size = dataset_size1
+    else:
+        dataset_size = dataset_size2
     while counter < dataset_size:
         ret, frame = cap.read()
         cv2.imshow('frame', frame)

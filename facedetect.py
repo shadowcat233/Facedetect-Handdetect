@@ -16,7 +16,7 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # 检测人脸
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.15, minNeighbors=5)
 
     # 如果检测到人脸，显示矩形框，并拍照
     if len(faces) > 0:
